@@ -8,4 +8,6 @@ import br.com.projeto.agenda.models.Agenda;
 @Repository
 public interface AgendaRepository extends JpaRepository<Agenda, Long> {
 
+	boolean existsByTelefone(String telefone);
+
 }

@@ -32,12 +32,15 @@ public class Agenda {
 	@Enumerated(EnumType.STRING)
 	private Categoria categoria;
 	
+	public void salvarCategoria(Categoria valor) {
+		this.categoria = valor;
+	}
+	
 	public Agenda(DtoNovoContato dtoNovoContato) {
 		this.nome = dtoNovoContato.nome();
 		this.sobrenome = dtoNovoContato.sobrenome();
 		this.telefone = dtoNovoContato.telefone();
 		this.email = dtoNovoContato.email();
-		this.descricao = dtoNovoContato.descricao();
-		this.categoria = dtoNovoContato.categoria();
+		salvarCategoria(dtoNovoContato.categoria());;
 	}
 }

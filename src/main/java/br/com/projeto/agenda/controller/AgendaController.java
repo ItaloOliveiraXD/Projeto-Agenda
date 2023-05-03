@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import br.com.projeto.agenda.dto.DtoNovoContato;
+import br.com.projeto.agenda.models.Agenda;
 import br.com.projeto.agenda.models.Categoria;
 import br.com.projeto.agenda.repository.AgendaRepository;
 
@@ -20,7 +21,7 @@ public class AgendaController {
 	
 	@Autowired
 	private AgendaRepository agendaRepository;
-
+	
 	@GetMapping
 	public String minhaAgenda() {
 		return "/agenda/index";
@@ -36,15 +37,17 @@ public class AgendaController {
 	}
 	
 	@PostMapping("/cadastraContato")
-	public String cadastraContato(@Valid DtoNovoContato dtoNovoContato, BindingResult resultado) {
+	public String cadastraContato(@Valid DtoNovoContato dtoNovoContato, BindingResult resultado, Model model) {
 		
 		if (resultado.hasErrors()) {
+			Categoria[] categorias = Categoria.values();
+			model.addAttribute("categorias", categorias);
 			return "/agenda/formNovoContato";
 		}
 		
 		System.out.println(dtoNovoContato.categoria());
 		
-//		agendaRepository.save(new Agenda(dtoNovoContato));
+		agendaRepository.save(new Agenda(dtoNovoContato));
 		
 		return "redirect:formNovoContato";
 	}
