@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head th:replace="~{base :: head}">
+</head>
+<body>
+	<header th:replace="~{base :: header}"></header>
+	<div class="container my-5">
+		<div class="row justify-content-center">
+			<div class="col-md-6">
+				<div class="card">
+					<div class="card-header">
+						<h3 class="text-center">Acesse sua Agenda</h3>
+					</div>
+					<div class="card-body">
+						<form th:action="@{/login}" method="post" >
+							<div class="form-group">
+								<label for="username">Nome de Usuário</label>
+								<input type="text"
+									class="form-control" id="username" name="username">
+							</div>
+							<div class="form-group">
+								<label for="password">Senha</label>
+								<input type="password"
+									class="form-control" id="password" name="password">
+							</div>
+							<div class="form-group text-center">
+								<button type="submit" class="btn btn-primary">Entrar</button>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+</body>
+</html>

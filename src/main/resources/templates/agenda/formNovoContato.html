@@ -1,40 +1,52 @@
 <!DOCTYPE html>
 <html lang="pt">
 
-<head th:replace="~{base :: head}"></head>
+<head th:replace="~{base :: head}">
+	<meta charset="utf-8">
+</head>
 
 <body>
 
 	<header th:replace="~{base :: header}"></header>
 
 	<div class="container">
+	
+		<div th:if="${error}" class="alert alert-warning mt-2" role="alert" th:text="${error}">
+		  	Messagens informativas.
+		</div>
+		
+		<div th:if="${success}" class="alert alert-success mt-2" role="alert" th:text="${success}">
+		  	Messagens informativas.
+		</div>
 
 		<h1 class="my-3">Novo Contato</h1>
 
-		<form th:object="${dtoNovoContato}" action="/agenda/cadastraContato" method="POST">
+		<form th:object="${dtoNovoContato}" th:action="@{/agenda/cadastraContato}" method="POST">
 		
 			<div class="form-row">
 				<div class="form-group col-md-6">
-					<label for="inputNome">Nome</label> 
-					<input th:field="*{nome}" name="nome" type="text" class="form-control" id="inputNome" placeholder="Digite seu nome">
+					<label for="nome">Nome</label> 
+					<input th:field="*{nome}" type="text" th:errorclass="is-invalid" class="form-control" id="inputNome" placeholder="Digite seu nome">
+					<div class="invalid-feedback" th:errors="*{nome}">Este campo está em branco</div>
 				</div>
 				<div class="form-group col-md-6">
 					<label for="sobrenome">Sobrenome</label> 
-					<input th:field="*{sobrenome}" name="sobrenome" type="text" class="form-control" placeholder="Digite seu sobrenome">
+					<input th:field="*{sobrenome}" type="text" class="form-control" placeholder="Digite seu sobrenome">
 				</div>
 			</div>
 			<div class="form-group">
-				<label for="inputEmail">Email</label>
-				<input th:field="*{email}" name="email" type="email" class="form-control" id="inputEmail" placeholder="email@email.com">
+				<label for="email">Email</label>
+				<input th:field="*{email}" type="email" class="form-control" placeholder="email@email.com">
 			</div>
 			<div class="form-row">
 				<div class="form-group col-md-6">
-					<label for="inputTelefone">Telefone</label>
-					<input th:field="*{telefone}" name="telefone" type="text" class="form-control" id="inputTelefone" placeholder="(xx) x xxxx-xxxx">
+					<label for="telefone">Telefone</label>
+					<input th:field="*{telefone}" type="text" th:errorclass="is-invalid" class="form-control" placeholder="(xx) x xxxx-xxxx">
+					<div class="invalid-feedback" th:errors="*{telefone}">Este campo está em branco</div>
 				</div>
 				<div class="form-group col-md-6">
-					<label for="inputCategoria">Categoria</label>  
-					<select th:field="*{categoria}" name="categoria" id="inputCategoria" class="form-control">
+					<label for="categoria">Categoria</label>  
+					<select th:field="*{categoria}" id="inputCategoria" class="form-control">
 						
 						<option th:each="categoriaa : ${categorias}"
 						 th:text="${categoriaa}"
@@ -43,8 +55,8 @@
 					</select>
 				</div>
 				<div class="form-group col-md-12">
-					<label for="inputDescricao">Descrição</label>
-					<textarea th:field="*{descricao}" name="descricao" class="form-control" id="inputDescricao"></textarea>
+					<label for="descricao">Descrição</label>
+					<textarea th:field="*{descricao}" class="form-control" id="inputDescricao"></textarea>
 				</div>
 			</div>
 

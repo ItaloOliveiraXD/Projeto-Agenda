@@ -5,17 +5,7 @@
 
 <body>
 
-	<!-- Navigation -->
-	<nav class="navbar navbar-expand-lg navbar-dark bg-dark static-top">
-		<div class="container">
-			<a class="navbar-brand" href="#">Agenda</a>
-			<button class="navbar-toggler" type="button" data-toggle="collapse"
-				data-target="#navbarResponsive" aria-controls="navbarResponsive"
-				aria-expanded="false" aria-label="Toggle navigation">
-				<span class="navbar-toggler-icon"></span>
-			</button>
-		</div>
-	</nav>
+	<header th:replace="~{base :: header}" ></header>
 
 
 	<div class="container">
@@ -34,26 +24,16 @@
 							<th>Sobrenome</th>
 							<th>Telefone</th>
 							<th>Categoria</th>
+							<th></th>
 						</tr>
 					</thead>
 					<tbody>
-						<tr>
-							<td><a href="#"> João</a></td>
-							<td>Miranda</td>
-							<td>35 9 5555-5555</td>
-							<td>Família</td>
-						</tr>
-						<tr>
-							<td><a href="#"> Leandro</a></td>
-							<td>Moreira</td>
-							<td>35 9 8888-5555</td>
-							<td>Família</td>
-						</tr>
-						<tr>
-							<td><a href="#"> Fátima</a></td>
-							<td>Oliveira</td>
-							<td>35 9 9999-4352</td>
-							<td>Conhecidos</td>
+						<tr th:each="contato : ${contatos}">
+							<td><a th:text="${contato.nome}" th:href="@{agenda/verContato/{id}(id = ${contato.id})}"> João</a></td>
+							<td th:text="${contato.sobrenome}">Miranda</td>
+							<td th:text="${contato.telefone}">35 9 5555-5555</td>
+							<td th:text="${contato.categoria}">Família</td>
+							<td><a class="btn btn-danger" th:href="@{agenda/deletarContato/{id}(id = ${contato.id})}" >Excluir</a></td>
 						</tr>
 					</tbody>
 				</table>
