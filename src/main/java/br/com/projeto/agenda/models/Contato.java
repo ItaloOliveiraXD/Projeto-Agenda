@@ -40,12 +40,13 @@ public class Contato {
 		
 		String nome = dtoNovoContato.nome().substring(0, 1).toUpperCase().concat(dtoNovoContato.nome().substring(1));
 		
-		if (sobrenome != null) {
+		if (dtoNovoContato.sobrenome() != "") {
 			String sobrenome = dtoNovoContato.sobrenome().substring(0, 1).toUpperCase().concat(dtoNovoContato.sobrenome().substring(1));
 			this.sobrenome = sobrenome;
 		} 
 		
 		this.nome = nome;
+		this.sobrenome = dtoNovoContato.sobrenome();
 		this.telefone = dtoNovoContato.telefone();
 		this.email = dtoNovoContato.email();
 		this.categoria = dtoNovoContato.categoria();
